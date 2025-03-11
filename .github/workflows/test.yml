@@ -1,0 +1,54 @@
+name: Ejecutar Tests en GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test-client:
+    name: Ejecutar Tests del Frontend (Client)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
+
+      - name: Moverse al directorio del frontend e instalar dependencias
+        run: cd client && npm install
+
+      - name: Ejecutar pruebas en el frontend
+        run: cd client && npm run test
+
+  test-backend:
+    name: Ejecutar Tests del Backend (Server)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: server/package-lock.json
+
+      - name: Moverse al directorio del server e instalar dependencias
+        run: cd server && npm install
+
+      - name: Ejecutar pruebas en el server
+        run: cd server && npm test
