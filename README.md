@@ -1,12 +1,17 @@
 # 📌 Sistema de Gestión Hotelera - TFG
 
 ## 📖 Descripción
+
 Este proyecto es un **Sistema de Gestión Hotelera** desarrollado como parte del **Trabajo de Fin de Grado (TFG)** en **Ingeniería Informática, especialidad en Ingeniería del Software**. Su objetivo principal es proporcionar una plataforma eficiente y fácil de usar para gestionar la operación diaria de un hotel, incluyendo **reservas, facturación, administración de empleados, habitaciones, huéspedes y generación de informes**.
+
+[![Demo Video](https://img.youtube.com/vi/le19BptaIMQ/maxresdefault.jpg)](https://youtu.be/le19BptaIMQ)
 
 ---
 
 ## 🚀 Funcionalidades
+
 El sistema permite realizar las siguientes acciones:
+
 - **Gestión de Reservas**: Crear, modificar y cancelar reservas de habitaciones.
 - **Administración de Empleados**: Añadir, modificar y eliminar empleados, así como gestionar sus roles y credenciales.
 - **Manejo de Habitaciones**: Consultar habitaciones disponibles, actualizar su estado (limpia, ocupada, sucia, bloqueada, etc.) y ver detalles específicos.
@@ -15,10 +20,11 @@ El sistema permite realizar las siguientes acciones:
 - **Generación de Informes**: Crear informes de ocupación, check-ins, check-outs y registros de huéspedes para la policía.
 - **Integración con PayPal**: Configuración de pagos mediante PayPal.
 - **Chat Interno**: Comunicación entre empleados.
-  
+
 ---
 
 ## 🛠️ **Tecnologías Utilizadas**
+
 - **Backend**: Node.js con Express.js.
 - **Base de Datos**: MySQL y MongoDB.
 - **Autenticación**: JSON Web Tokens (JWT).
@@ -30,12 +36,17 @@ El sistema permite realizar las siguientes acciones:
 ---
 
 ## 📌 Cómo Ejecutar el Proyecto
+
 ### **Clonar el repositorio**
+
 ```sh
  git clone https://github.com/paabloomaartinez/HotelManager.git
 ```
+
 ### **Configurar la Base de datos**
+
 Este sistema utiliza MySQL Workbench. La estructura de la base de datos es la siguiente:
+
 ```sql
 CREATE DATABASE IF NOT EXISTS HotelManagement;
 USE HotelManagement;
@@ -240,8 +251,11 @@ VALUES ('00000000P', 'DNI', 'Pablo', 'Martinez Amunarruz');
 INSERT INTO Empleado (numeroDocumento, nombreUsuario, contrasena, rol)
 VALUES ('00000000P', 'pmartinez', '$argon2id$v=19$m=65536,t=3,p=4$lNFBIAfg84uWRxz5j/yCqg$KOUTRaDoHZpab3Noca4gnP34xPlY5iFojf2hxTVtIX0', 'Administrador');
 ```
+
 ### **Configurar variables de entorno (.env)**
+
 Crear un archivo `.env` en la raíz con:
+
 ```
 DB_HOST = tu_host
 DB_USER = tu_user
@@ -260,36 +274,45 @@ PAYPAL_CLIENT_ID= tu_paypal_id
 
 MONGO_URI= tu_mongo_uri
 ```
+
 ### **Ejecutar el frontend**
+
 ```sh
  cd client
  npm install
 ```
+
 - Ejecutar en modo desarrollo: `npm run serve`
 - Ejecutar en modo de despliegue (optimizado): `npm run build`
 
 El cliente se ejecutará en http://localhost:8080.
 
 En el **Login** podrás usar:
+
 - Usuario: `pmartinez`
 - Contraseña: `pmartinez`
 
 ### **Ejecutar el backend**
+
 ```sh
  cd server
  npm install
  npm start
 ```
+
 El servidor se ejecutará en el puerto que se haya configurado en el fichero `.env` o por defecto en http://localhost:3000
 
 ---
 
 ## 📌 Rutas Disponibles
+
 ### 🔑 **Autenticación y Login**
+
 - `POST /login` → Iniciar sesión.
 - `POST /reservations/getReservation` → Obtener detalles de una reserva.
 
 ### 👥 **Gestión de Empleados**
+
 - `GET /admin/employees/getEmployees` → Obtener la lista de empleados.
 - `POST /admin/employees/addEmployee` → Agregar un nuevo empleado.
 - `PUT /admin/employees/updateEmployee/` → Actualizar datos de un empleado.
@@ -298,6 +321,7 @@ El servidor se ejecutará en el puerto que se haya configurado en el fichero `.e
 - `POST /admin/changeRole` → Cambiar el rol de un empleado.
 
 ### 🏨 **Gestión de Habitaciones**
+
 - `GET /rooms/getRooms` → Obtener la lista de habitaciones.
 - `PUT /rooms/setRoomState/` → Actualizar el estado de una habitación.
 - `GET /rooms/getDirtyRooms` → Obtener las habitaciones sucias.
@@ -306,6 +330,7 @@ El servidor se ejecutará en el puerto que se haya configurado en el fichero `.e
 - `GET /rooms/getRoomDetails/:idReserva/:numHabitacion` → Obtener detalles de una habitación específica.
 
 ### 📅 **Gestión de Reservas**
+
 - `GET /reservations/getAllReservations` → Obtener todas las reservas.
 - `POST /reservations/available` → Consultar disponibilidad de habitaciones en un rango de fechas.
 - `POST /reservations/makeReservation` → Crear una nueva reserva.
@@ -323,6 +348,7 @@ El servidor se ejecutará en el puerto que se haya configurado en el fichero `.e
 - `GET /checkouts/summary` → Obtener resumen de check-outs.
 
 ### 🛏️ **Gestión de Huéspedes**
+
 - `POST /reservations/registerGuestsForRoom` → Registrar huéspedes en una habitación.
 - `GET /clients/guests` → Obtener lista de huéspedes particulares.
 - `GET /clients/corporate` → Obtener lista de clientes corporativos.
@@ -335,9 +361,11 @@ El servidor se ejecutará en el puerto que se haya configurado en el fichero `.e
 - `PUT /clients/updateCompany` → Actualizar datos de una empresa/agencia.
 
 ### 🧾 **Facturación**
+
 - `GET /factura/:idReserva` → Obtener la factura de una reserva.
 
 ### 📝 **Informes y Reportes**
+
 - `GET /lista-policia` → Obtener lista de huéspedes para la policía.
 - `GET /lista-ocupacion` → Obtener informe de ocupación del hotel.
 - `GET /checkins-hoy` → Obtener lista de check-ins del día.
@@ -345,37 +373,41 @@ El servidor se ejecutará en el puerto que se haya configurado en el fichero `.e
 - `GET /reservas` → Obtener informe de reservas finalizadas.
 
 ### 💬 **Chat Interno**
+
 - `GET /messages` → Obtener mensajes del chat.
 
 ### 💳 **Pagos y Configuración**
+
 - `GET /config/paypal` → Obtener configuración de PayPal.
 
 ---
 
 ## 🛠️ Cómo Ejecutar las pruebas
+
 ### **Ejecutar pruebas en el frontend**
+
 ```sh
  cd client
  npm install
  npm run test
- ```
+```
 
 ### **Ejecutar pruebas en el backend**
+
 ```sh
  cd server
  npm install
  npm test
 ```
+
 El proyecto incluye un workflow test.yml en GitHub Actions. Cada vez que se realiza un push o pull request al repositorio, se ejecutan automáticamente las pruebas del backend y frontend.
 
 Esto garantiza la estabilidad y calidad del código de forma continua.
 
 ---
 
-
-
 ## 👨‍💻 **Autor**
+
 Este proyecto ha sido desarrollado como parte del **Trabajo de Fin de Grado** en **Ingeniería Informática - Ingeniería del Software**.
 
 Si tienes preguntas o sugerencias, ¡no dudes en contribuir o contactarme! 😊
-
